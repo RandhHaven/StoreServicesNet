@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StoreServices.Api.Author.Persistence;
 
 namespace StoreServices.Api.Author
 {
@@ -25,6 +27,11 @@ namespace StoreServices.Api.Author
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<ContextAuthor>(options =>
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("AppConnection"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
