@@ -1,23 +1,22 @@
-﻿namespace StoreServices.Api.Author.Persistence
+﻿namespace StoreServices.Api.Book.Persistence
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
-    using StoreServices.Api.Author.Models;
+    using StoreServices.Api.Book.Models;
     using System;
 
-    public class ContextAuthor : DbContext
+    public class ContextBook : DbContext
     {
         #region Properties
         private readonly IConfiguration _configuration;
         #endregion
 
         #region Tables
-        public virtual DbSet<AcademicDegree> AcademicDegree { get; set; }
-        public virtual DbSet<BookAuthor> BookAuthor { get; set; }
+        public virtual DbSet<MaterialLibrary> MaterialLibrary { get; set; }
         #endregion
 
         #region Builds
-        public ContextAuthor(DbContextOptions<ContextAuthor> options,
+        public ContextBook(DbContextOptions<ContextBook> options,
             IConfiguration configuration) : base(options)
         {
             this._configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
@@ -26,7 +25,7 @@
 
         #region Methods
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {            
+        {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,7 +33,7 @@
             //En caso de que el contexto no este configurado, lo configuramos mediante la cadena de conexion
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(_configuration.GetConnectionString("AppConnection"));
+                optionsBuilder.UseSqlServer(_configuration.GetConnectionString("AppConnection"));
             }
         }
         #endregion
