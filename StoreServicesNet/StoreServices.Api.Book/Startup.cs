@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using StoreServices.Api.Book.Persistence;
+using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
+using MediatR;
+using StoreServices.Api.Book.Aplication.InsertData;
 
 namespace StoreServices.Api.Book
 {
@@ -24,7 +23,16 @@ namespace StoreServices.Api.Book
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(ctler => ctler.RegisterValidatorsFromAssemblyContaining<InsertData>());
+
+            // Configuration EF Core
+            services.AddDbContext<ContextBook>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("AppConnection"));
+            });
+
+            //Configuration MediaTR
+            services.AddMediatR(typeof(InsertData).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

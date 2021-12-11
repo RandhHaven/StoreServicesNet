@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/BookAuthor",
-      "applicationUrl": "http://localhost:5467",
+      "applicationUrl": "http://localhost:63322",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
