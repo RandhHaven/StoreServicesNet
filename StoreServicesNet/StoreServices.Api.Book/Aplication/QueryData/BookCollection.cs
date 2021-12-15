@@ -1,10 +1,10 @@
 ﻿namespace StoreServices.Api.Book.Aplication.QueryData
 {
     using MediatR;
-    using StoreServices.Api.Book.Models;
+    using StoreServices.Api.Book.EntityDTO;
     using System.Collections.Generic;
 
-    public class BookCollection : IRequest<List<MaterialLibrary>>
+    public class BookCollection : IRequest<List<MaterialLibraryDto>>
     {
     }
 }

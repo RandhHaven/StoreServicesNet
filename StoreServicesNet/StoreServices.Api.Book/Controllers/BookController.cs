@@ -5,6 +5,7 @@
     using StoreServices.Api.Book.Aplication.InsertData;
     using StoreServices.Api.Book.Aplication.QueryData;
     using StoreServices.Api.Book.Controllers.Base;
+    using StoreServices.Api.Book.EntityDTO;
     using StoreServices.Api.Book.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -27,7 +28,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<MaterialLibrary>>> Get()
+        public async Task<ActionResult<List<MaterialLibraryDto>>> Get()
         {
             return await this._IMediator.Send(new BookCollection());
         }

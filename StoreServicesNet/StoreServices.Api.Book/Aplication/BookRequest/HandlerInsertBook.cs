@@ -1,23 +1,20 @@
-﻿namespace StoreServices.Api.Book.Aplication.InsertData
+﻿namespace StoreServices.Api.Book.Aplication.BookRequest
 {
-    using AutoMapper;
     using MediatR;
+    using StoreServices.Api.Book.Aplication.GenericBase;
     using StoreServices.Api.Book.Models;
     using StoreServices.Api.Book.Persistence;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class HandlerData : IRequestHandler<ExecuteData>
+    public class HandlerInsertBook : HandlerInsertData
     {
-        public readonly ContextBook _context;
-       
-        public HandlerData(ContextBook context)
+        public HandlerInsertBook(ContextBook context) : base(context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Unit> Handle(ExecuteData request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ExecuteBook request, CancellationToken cancellationToken)
         {
             var book = new MaterialLibrary
             {
@@ -30,6 +27,11 @@
             var value = await this._context.SaveChangesAsync();
 
             return Unit.Value;
+        }
+
+        public override Task<Unit> Handle(ExecuteData request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
