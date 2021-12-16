@@ -4,7 +4,7 @@
     using StoreServices.Api.Book.EntityDTO;
     using System.Collections.Generic;
 
-    public class CollectionBook : CollectionData<CollectionBook, List<MaterialLibraryDto>>
+    public class CollectionBook : CollectionData
     {
     }
 }

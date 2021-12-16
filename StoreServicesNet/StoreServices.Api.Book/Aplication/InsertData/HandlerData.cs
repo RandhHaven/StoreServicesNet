@@ -28,7 +28,6 @@
 
             this._context.MaterialLibrary.Add(book);
             var value = await this._context.SaveChangesAsync();
-
             return Unit.Value;
         }
     }

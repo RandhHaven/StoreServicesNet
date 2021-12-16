@@ -6,7 +6,7 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public abstract class HandlerInsertData : IRequestHandler<ExecuteData>
+    public abstract class HandlerInsertData<T>: IRequestHandler<ExecuteData>
     {
         protected readonly ContextBook _context;
 
@@ -15,8 +15,9 @@
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-
-        public abstract Task<Unit> Handle(ExecuteData request, CancellationToken cancellationToken);
-        
+        public Task<Unit> Handle(ExecuteData request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

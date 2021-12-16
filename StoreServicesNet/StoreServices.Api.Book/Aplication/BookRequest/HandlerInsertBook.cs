@@ -8,7 +8,7 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class HandlerInsertBook : HandlerInsertData
+    public class HandlerInsertBook : HandlerInsertData<ExecuteBook>
     {
         public HandlerInsertBook(ContextBook context) : base(context)
         {
@@ -27,11 +27,6 @@
             var value = await this._context.SaveChangesAsync();
 
             return Unit.Value;
-        }
-
-        public override Task<Unit> Handle(ExecuteData request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

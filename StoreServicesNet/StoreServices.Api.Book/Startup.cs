@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using MediatR;
 using StoreServices.Api.Book.Aplication.InsertData;
+using AutoMapper;
 
 namespace StoreServices.Api.Book
 {
@@ -33,6 +34,8 @@ namespace StoreServices.Api.Book
 
             //Configuration MediaTR
             services.AddMediatR(typeof(InsertData).Assembly);
+
+            services.AddAutoMapper(typeof(HandlerData).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
