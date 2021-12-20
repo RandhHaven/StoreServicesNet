@@ -21,10 +21,9 @@ namespace StoreServices.Api.Book.Migrations
 
             modelBuilder.Entity("StoreServices.Api.Book.Models.MaterialLibrary", b =>
                 {
-                    b.Property<long>("MaterialLibraryID")
+                    b.Property<Guid?>("MaterialLibraryID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BookAuthor")
                         .HasColumnType("uniqueidentifier");

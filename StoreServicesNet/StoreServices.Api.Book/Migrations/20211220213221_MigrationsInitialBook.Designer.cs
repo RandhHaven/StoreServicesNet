@@ -10,7 +10,7 @@ using StoreServices.Api.Book.Persistence;
 namespace StoreServices.Api.Book.Migrations
 {
     [DbContext(typeof(ContextBook))]
-    [Migration("20211211052338_MigrationsInitialBook")]
+    [Migration("20211220213221_MigrationsInitialBook")]
     partial class MigrationsInitialBook
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,10 +23,9 @@ namespace StoreServices.Api.Book.Migrations
 
             modelBuilder.Entity("StoreServices.Api.Book.Models.MaterialLibrary", b =>
                 {
-                    b.Property<long>("MaterialLibraryID")
+                    b.Property<Guid?>("MaterialLibraryID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BookAuthor")
                         .HasColumnType("uniqueidentifier");

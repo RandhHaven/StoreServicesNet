@@ -6,9 +6,10 @@
     using StoreServices.Api.Book.Aplication.QueryData;
     using StoreServices.Api.Book.Controllers.Base;
     using StoreServices.Api.Book.EntityDTO;
-    using StoreServices.Api.Book.Models;
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using static StoreServices.Api.Book.Aplication.QueryDataFilter.BookDataFilter;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -31,6 +32,12 @@
         public async Task<ActionResult<List<MaterialLibraryDto>>> Get()
         {
             return await this._IMediator.Send(new BookCollection());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MaterialLibraryDto>> GetFilter(Guid id)
+        {
+            return await this._IMediator.Send(new BookFilter { BookID = id });
         }
         #endregion
     }

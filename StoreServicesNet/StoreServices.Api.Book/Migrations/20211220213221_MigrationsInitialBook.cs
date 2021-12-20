@@ -11,8 +11,7 @@ namespace StoreServices.Api.Book.Migrations
                 name: "MaterialLibrary",
                 columns: table => new
                 {
-                    MaterialLibraryID = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaterialLibraryID = table.Column<Guid>(nullable: false),
                     BookTittle = table.Column<string>(nullable: true),
                     DatePublish = table.Column<DateTime>(nullable: true),
                     BookAuthor = table.Column<Guid>(nullable: false)

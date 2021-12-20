@@ -15,6 +15,7 @@
     {
         public readonly ContextBook _context;
         private readonly IMapper _mapper;
+
         public HandlerData(ContextBook context, IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
