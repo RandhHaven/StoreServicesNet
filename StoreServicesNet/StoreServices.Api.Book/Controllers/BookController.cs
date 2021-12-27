@@ -13,7 +13,7 @@
 
     [Route("api/[controller]")]
     [ApiController]
-    public class BookController : WebApiControllers<BookController>
+    public sealed class BookController : WebApiControllers<BookController>
     {
         #region Build
         public BookController(IMediator _iMediator) : base(_iMediator)

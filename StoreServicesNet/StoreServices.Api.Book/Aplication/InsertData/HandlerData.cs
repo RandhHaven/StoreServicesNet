@@ -23,7 +23,7 @@
             {
                 BookTittle = request.BookTittle,
                 DatePublish = request.DatePublish,
-                BookAuthor = Guid.NewGuid()
+                BookAuthor = request.BookAuthor
             };
 
             this._context.MaterialLibrary.Add(book);
