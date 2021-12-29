@@ -1,15 +1,15 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using StoreServices.Api.ShoppingCart.Models;
-using StoreServices.Api.ShoppingCart.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace StoreServices.Api.ShoppingCart.Aplication.QueryData
+﻿namespace StoreServices.Api.ShoppingCart.Aplication.QueryData
 {
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
+    using StoreServices.Api.ShoppingCart.Models;
+    using StoreServices.Api.ShoppingCart.Persistence;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     public class QueryCartSession
     {
         public class CartSesionCollection : IRequest<List<CartSessionDetail>>

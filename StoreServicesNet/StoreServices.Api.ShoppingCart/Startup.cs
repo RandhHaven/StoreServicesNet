@@ -8,6 +8,7 @@ using StoreServices.Api.ShoppingCart.Persistence;
 using Microsoft.EntityFrameworkCore;
 using StoreServices.Api.ShoppingCart.Aplication.InsertData;
 using MediatR;
+using System;
 
 namespace StoreServices.Api.ShoppingCart
 {
@@ -33,6 +34,12 @@ namespace StoreServices.Api.ShoppingCart
 
             //Configuration MediaTR
             services.AddMediatR(typeof(InsertCartSession.Handler).Assembly);
+
+            // Add Http Client
+            services.AddHttpClient("Books", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["Services:Books"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
