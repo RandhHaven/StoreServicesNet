@@ -16,10 +16,18 @@
         #endregion
 
         #region Builds
+        public ContextBook()
+        {
+        }
+
         public ContextBook(DbContextOptions<ContextBook> options,
             IConfiguration configuration) : base(options)
         {
             this._configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
+
+        public ContextBook(DbContextOptions<ContextBook> options) : base(options)
+        {
         }
         #endregion
 
