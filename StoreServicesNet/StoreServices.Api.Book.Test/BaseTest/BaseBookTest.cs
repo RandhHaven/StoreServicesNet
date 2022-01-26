@@ -43,9 +43,7 @@
             dbSet.As<IAsyncEnumerable<MaterialLibrary>>().Setup(x => x.GetAsyncEnumerator(new System.Threading.CancellationToken()))
             .Returns(new AsyncEnumerator<MaterialLibrary>(dataPrueba.GetEnumerator()));
 
-
             dbSet.As<IQueryable<MaterialLibrary>>().Setup(x => x.Provider).Returns(new AsyncQueryProvider<MaterialLibrary>(dataPrueba.Provider));
-
 
             var contexto = new Mock<ContextBook>();
             contexto.Setup(x => x.MaterialLibrary).Returns(dbSet.Object);

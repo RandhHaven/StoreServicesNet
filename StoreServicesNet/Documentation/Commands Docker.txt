@@ -1,0 +1,15 @@
+
+
+----------------------------- Rabbit -----------------------------
+Descargar imagen
+docker pull rabbitmq
+
+ejecutar el container
+docker run -d --hostname rabbit-server-rd --name rabbit-rd rabbitmq:3
+
+instalar plugin para instalar una interfaz grafica
+docker run -d --hostname rabbit-server --name rabbit-web -p 56789:56789 rabbitmq:3-management
+
+
+
+docker start naombreimagen
