@@ -6,7 +6,6 @@
     {
         public DateTime Timestamp { get; protected set; }
 
-
         protected Event()
         {
             this.Timestamp = DateTime.UtcNow;
