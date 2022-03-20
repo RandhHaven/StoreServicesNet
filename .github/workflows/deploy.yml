@@ -18,7 +18,7 @@ jobs:
     - name: Install dotnet ef
       run: dotnet tool install --global dotnet-ef
     - name: Build with dotnet
-      run: dotnet build --configuration Release StoreServicesNet\StoreServicesNet.sln
+      run: dotnet build --configuration Release StoreServicesNet\\StoreServicesNet.sln
 
   test:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
     - name: run tests
-      run: dotnet test StoreServicesNet\StoreServicesNet.sln --configuration Release
+      run: dotnet test StoreServicesNet\\StoreServicesNet.sln --configuration Release
       env:
         ConnectionStrings__DefaultConnection: data source=DESKTOP-SOVKUIR\SQLEXPRESS;initial catalog=PromotionDB;Trusted_Connection=True
         
