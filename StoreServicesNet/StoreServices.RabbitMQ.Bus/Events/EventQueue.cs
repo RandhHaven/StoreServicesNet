@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class Event
+    public class EventQueue
     {
         public DateTime Timestamp { get; protected set; }
 
-        protected Event()
+        protected EventQueue()
         {
             this.Timestamp = DateTime.UtcNow;
         }

@@ -7,9 +7,9 @@
     public interface IRabbitEventBus
     {
         Task SendCommand<T>(T command) where T : MessageCommand;
-        void Publish<T>(T genericEvent) where T : Event;
+        void Publish<T>(T genericEvent) where T : EventQueue;
 
-        void Subscribe<T, TH>(T genericEvent) where T : Event where TH: IEventHandler<T>;
+        void Subscribe<T, TH>(T genericEvent) where T : EventQueue where TH: IEventHandler<T>;
 
     }
 }

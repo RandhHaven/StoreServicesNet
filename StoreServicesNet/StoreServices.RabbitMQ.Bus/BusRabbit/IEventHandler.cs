@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IEventHandler<in TEvent> : IEventHandler where TEvent : Event
+    public interface IEventHandler<in TEvent> : IEventHandler where TEvent : EventQueue
     {
         Task Handle(TEvent @TEvent);
     }
