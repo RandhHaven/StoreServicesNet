@@ -24,3 +24,33 @@ jobs:
           tag_with_ref: true
           tag_with_sha: true
           tags: ${{ github.sha }}
+          
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+    - name: Install dotnet ef
+      run: dotnet tool install --global dotnet-ef
+    - name: Build with dotnet
+      run: dotnet build --configuration Release StoreServicesNet.sln
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      sql:
+        image: mcr.microsoft.com/mssql/server
+        ports:
+          - 1433:1433
+        env:
+          SA_PASSWORD: Your_password123
+          ACCEPT_EULA: Y
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+    - name: run tests
+      run: dotnet test StoreServicesNet.sln --configuration Release
+      env:
+        ConnectionStrings__DefaultConnection: data source=DESKTOP-SOVKUIR\SQLEXPRESS;initial catalog=PromotionDB;Trusted_Connection=True
