@@ -7,23 +7,7 @@ on:
     branches:
       - main
 
-jobs:
-  deploy:
-    name: deploy to cluster
-    runs-on: windows-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@master
-        
-      - name: build and push to docker
-        uses: docker/setup-buildx-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: ${{ github.repository }}
-          tag_with_ref: true
-          tag_with_sha: true
-          tags: ${{ github.sha }}
+jobs:  
           
   build:
     runs-on: ubuntu-latest
@@ -34,7 +18,7 @@ jobs:
     - name: Install dotnet ef
       run: dotnet tool install --global dotnet-ef
     - name: Build with dotnet
-      run: dotnet build --configuration Release StoreServicesNet.sln
+      run: dotnet build --configuration Release StoreServicesNet\StoreServicesNet.sln
 
   test:
     runs-on: ubuntu-latest
@@ -51,6 +35,23 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
     - name: run tests
-      run: dotnet test StoreServicesNet.sln --configuration Release
+      run: dotnet test StoreServicesNet\StoreServicesNet.sln --configuration Release
       env:
         ConnectionStrings__DefaultConnection: data source=DESKTOP-SOVKUIR\SQLEXPRESS;initial catalog=PromotionDB;Trusted_Connection=True
+        
+  deploy:
+    name: deploy to cluster
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+        
+      - name: build and push to docker
+        uses: docker/setup-buildx-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ github.repository }}
+          tag_with_ref: true
+          tag_with_sha: true
+          tags: ${{ github.sha }}

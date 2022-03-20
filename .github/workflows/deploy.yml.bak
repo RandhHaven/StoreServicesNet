@@ -8,6 +8,38 @@ on:
       - main
 
 jobs:
+  
+          
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+    - name: Install dotnet ef
+      run: dotnet tool install --global dotnet-ef
+    - name: Build with dotnet
+      run: dotnet build --configuration Release StoreServicesNet\StoreServicesNet.sln
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      sql:
+        image: mcr.microsoft.com/mssql/server
+        ports:
+          - 1433:1433
+        env:
+          SA_PASSWORD: Your_password123
+          ACCEPT_EULA: Y
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+    - name: run tests
+      run: dotnet test StoreServicesNet\StoreServicesNet.sln --configuration Release
+      env:
+        ConnectionStrings__DefaultConnection: data source=DESKTOP-SOVKUIR\SQLEXPRESS;initial catalog=PromotionDB;Trusted_Connection=True
+        
   deploy:
     name: deploy to cluster
     runs-on: windows-latest
