@@ -2,8 +2,8 @@
 {
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
-    using StoreServices.Api.Book.Aplication.InsertData;
-    using StoreServices.Api.Book.Aplication.QueryData;
+    using StoreServices.Api.Book.Aplication.BookApplication.Commands.CreateBook;
+    using StoreServices.Api.Book.Aplication.BookApplication.Queries.GetBooksAll;
     using StoreServices.Api.Book.Controllers.Base;
     using StoreServices.Api.Book.EntityDTO;
     using System;
@@ -23,7 +23,7 @@
 
         #region Actions
         [HttpPost]
-        public async Task<ActionResult<Unit>> Insert(ExecuteData data)
+        public async Task<ActionResult<Unit>> Insert(CreateBookCommand data)
         {
             return await this._IMediator.Send(data);
         }
@@ -31,7 +31,7 @@
         [HttpGet]
         public async Task<ActionResult<List<MaterialLibraryDto>>> Get()
         {
-            return await this._IMediator.Send(new BookCollection());
+            return await this._IMediator.Send(new GetBookAllQuery());
         }
 
         [HttpGet("{id}")]

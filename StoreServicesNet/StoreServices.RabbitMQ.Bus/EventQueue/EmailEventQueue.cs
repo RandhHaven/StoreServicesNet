@@ -1,6 +1,6 @@
 ﻿namespace StoreServices.RabbitMQ.Bus.Events
 {
-    internal class EmailEventQueue : EventQueue
+    public class EmailEventQueue : EventQueue
     {
         public string Addressee { get; set; }
         public string Tittle { get; set; }

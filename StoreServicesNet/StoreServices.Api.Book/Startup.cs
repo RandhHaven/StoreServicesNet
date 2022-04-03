@@ -7,8 +7,9 @@ using StoreServices.Api.Book.Persistence;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using MediatR;
-using StoreServices.Api.Book.Aplication.InsertData;
 using AutoMapper;
+using System.Reflection;
+using FluentValidation;
 
 namespace StoreServices.Api.Book
 {
@@ -24,8 +25,8 @@ namespace StoreServices.Api.Book
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddFluentValidation(ctler => ctler.RegisterValidatorsFromAssemblyContaining<InsertData>());
-
+            services.AddControllers();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             // Configuration EF Core
             services.AddDbContext<ContextBook>(options =>
             {
@@ -33,9 +34,10 @@ namespace StoreServices.Api.Book
             });
 
             //Configuration MediaTR
-            services.AddMediatR(typeof(InsertData).Assembly);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddAutoMapper(typeof(HandlerData).Assembly);
+            services.AddSwaggerGen();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +51,13 @@ namespace StoreServices.Api.Book
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core Phonebook API");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseEndpoints(endpoints =>
             {

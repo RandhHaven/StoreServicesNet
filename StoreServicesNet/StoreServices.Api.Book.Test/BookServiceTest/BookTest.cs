@@ -2,7 +2,8 @@
 {
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
-    using StoreServices.Api.Book.Aplication.QueryData;
+    using StoreServices.Api.Book.Aplication.BookApplication.Commands.CreateBook;
+    using StoreServices.Api.Book.Aplication.BookApplication.Queries.GetBooksAll;
     using StoreServices.Api.Book.Aplication.QueryDataFilter;
     using StoreServices.Api.Book.Models;
     using StoreServices.Api.Book.Persistence;
@@ -60,9 +61,9 @@
             var mapper = mapConfig.CreateMapper();
             //3. Instanciar a la clase Manejador y pasarle como parametros los mocks que he creado
 
-            HandlerData manejador = new HandlerData(mockContexto.Object, mapper);
+            GetBookAllQueryHandler manejador = new GetBookAllQueryHandler(mockContexto.Object, mapper);
 
-            BookCollection request = new BookCollection();
+            GetBookAllQuery request = new GetBookAllQuery();
 
             var lista = await manejador.Handle(request, new System.Threading.CancellationToken());
 
@@ -79,12 +80,12 @@
 
             var contexto = new ContextBook(options);
 
-            var request = new Aplication.InsertData.ExecuteData();
+            var request = new CreateBookCommand();
             request.BookTittle = "Microservice Book";
             request.BookAuthor = Guid.Empty;
             request.DatePublish = DateTime.Now;
 
-            var manejador = new Aplication.InsertData.HandlerData(contexto);
+            var manejador = new CreateBookCommandHandler(contexto);
 
             var libro = await manejador.Handle(request, new System.Threading.CancellationToken());
 

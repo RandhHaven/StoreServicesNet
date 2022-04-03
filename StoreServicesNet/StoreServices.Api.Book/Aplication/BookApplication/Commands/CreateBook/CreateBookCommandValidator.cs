@@ -1,10 +1,10 @@
-﻿namespace StoreServices.Api.Book.Aplication.InsertData
+﻿namespace StoreServices.Api.Book.Aplication.BookApplication.Commands.CreateBook
 {
     using FluentValidation;
 
-    public class ExecuteDataValidation : AbstractValidator<ExecuteData>
+    public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand>
     {
-        public ExecuteDataValidation()
+        public CreateBookCommandValidator()
         {
             RuleFor(x => x.BookTittle).NotEmpty();
             RuleFor(x => x.DatePublish).NotEmpty();

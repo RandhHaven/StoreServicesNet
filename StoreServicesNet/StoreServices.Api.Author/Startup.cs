@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using StoreServices.Api.Author.Application.InsertData;
 using StoreServices.Api.Author.Persistence;
 using FluentValidation.AspNetCore;
+using System.Reflection;
 
 namespace StoreServices.Api.Author
 {
@@ -38,7 +34,9 @@ namespace StoreServices.Api.Author
             });
 
             //Configuration MediaTR
-            services.AddMediatR(typeof(InsertData).Assembly);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +50,13 @@ namespace StoreServices.Api.Author
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSwagger();
 
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core Phonebook API");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
