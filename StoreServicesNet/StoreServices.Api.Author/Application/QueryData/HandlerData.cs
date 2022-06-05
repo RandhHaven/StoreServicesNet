@@ -11,16 +11,16 @@
 
     public class HandlerData : IRequestHandler<ListAuthor, List<BookAuthor>>
     {
-        public readonly ContextAuthor _context;
+        public readonly ContextAuthor context;
 
-        public HandlerData(ContextAuthor context)
+        public HandlerData(ContextAuthor _context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            context = _context ?? throw new ArgumentNullException(nameof(_context));
         }
 
         public async Task<List<BookAuthor>> Handle(ListAuthor request, CancellationToken cancellationToken)
         {
-            var authors = await this._context.BookAuthor.ToListAsync();
+            var authors = await this.context.BookAuthor.ToListAsync();
             return authors;
         }
     }

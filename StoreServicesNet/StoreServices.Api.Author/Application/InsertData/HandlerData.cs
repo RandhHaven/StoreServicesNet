@@ -9,11 +9,11 @@
 
     public class HandlerData : IRequestHandler<ExecuteData>
     {
-        public readonly ContextAuthor _context;
+        public readonly ContextAuthor context;
 
-        public HandlerData(ContextAuthor context)
+        public HandlerData(ContextAuthor _context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            context = _context ?? throw new ArgumentNullException(nameof(_context));
         }
 
         public async Task<Unit> Handle(ExecuteData request, CancellationToken cancellationToken)
@@ -26,8 +26,8 @@
                 BookAuthorGuid = Convert.ToString(Guid.NewGuid())
             };
 
-            this._context.BookAuthor.Add(author);
-            var value = await this._context.SaveChangesAsync();
+            this.context.BookAuthor.Add(author);
+            var value = await this.context.SaveChangesAsync();
 
             return Unit.Value;
         }

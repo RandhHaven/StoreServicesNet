@@ -18,8 +18,8 @@
 
         public GetBookByFilterQueryHandler(ContextBook _context, IMapper _mapper)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            context = context ?? throw new ArgumentNullException(nameof(context));
+            mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<MaterialLibraryDto> Handle(GetBookByFilterQuery request, CancellationToken cancellationToken)
